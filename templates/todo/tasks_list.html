@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4 text-center my-5">Tasks List</h1>
+    <div class="text-center mb-4">
+{#      <a href="{% url 'to_do:task-create' %}" class="btn btn-dark">Create</a>#}
+    </div>
+{#    <form title="<.> dot - for and search, <,> comma - for or search, <-> minus - for exclusion from search"#}
+{#          method="get" action="" class="form-inline justify-content-center mb-4">#}
+{#      {{ search_form|crispy }}#}
+{#      <input class="btn btn-secondary ml-2" type="submit" value="Search">#}
+{#    </form>#}
+    {% if task_list %}
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Started</th>
+            <th>Deadline</th>
+            <th>is_done</th>
+            <th>tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in task_list %}
+            <tr>
+              <td>{{ task.id }}</td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.datetime }}</td>
+              <td>{{ task.deadline }}</td>
+              <td>{{ task.is_done }}</td>
+              <td>
+                {% for tag in task.tags.all %}
+                  {{ tag.name }},
+                {% endfor %}
+              </td>
+{#              <td><a href="{% url "to do:task-detail" pk=task.id %}" class="btn btn-secondary">View</a></td>#}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        There are no tasks.
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
