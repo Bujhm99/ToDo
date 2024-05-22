@@ -5,7 +5,7 @@ from django.db import models
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
-    def __str__(self) -> models.CharField:
+    def __str__(self) -> str:
         return self.name
 
 
@@ -17,7 +17,7 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
 
-    def __str__(self) -> models.CharField:
+    def __str__(self) -> str:
         return f"Task: {self.name} is done: {self.is_done}"
 
     class Meta:

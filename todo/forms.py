@@ -1,6 +1,6 @@
 from django import forms
 
-from todo.models import Tag, Task
+from todo.models import Task
 
 
 class DateTimeLocalInput(forms.DateTimeInput):
