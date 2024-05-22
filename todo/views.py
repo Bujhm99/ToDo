@@ -11,13 +11,14 @@ class TaskListView(generic.ListView):
     queryset = Task.objects.prefetch_related("tags")
     template_name = "todo/tasks_list.html"
 
+
 class TaskCreateView(generic.CreateView):
     form_class = TaskForm
     success_url = reverse_lazy("to_do:index")
     template_name = "todo/task_form.html"
 
 
-class TaskUpdateView( generic.UpdateView):
+class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("to_do:index")

@@ -16,7 +16,6 @@ class TagViewTest(TestCase):
             name="pushong",
         )
 
-
     def test_tag_create_get_succses_redirect(self):
         url = reverse("to_do:tag-create")
         response = self.client.post(path=url, data={

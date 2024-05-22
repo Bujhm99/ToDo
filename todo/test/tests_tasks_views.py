@@ -20,7 +20,6 @@ class PrivateManufactureViewTest(TestCase):
             is_done=False
         )
 
-
     def test_task_delete_get_succses_redirect(self):
         url = reverse("to_do:task-delete", args=["1"])
         response = self.client.post(path=url)
