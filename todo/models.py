@@ -5,6 +5,9 @@ from django.db import models
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self) -> models.CharField:
+        return self.name
+
 
 class Task(models.Model):
     name = models.CharField(max_length=255, unique=False)
@@ -13,3 +16,6 @@ class Task(models.Model):
     deadline = models.DateTimeField(blank=True, null=True, unique=False)
     is_done = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
+
+    def __str__(self) -> models.CharField:
+        return f"Task: {self.name} is done: {self.is_done}"
