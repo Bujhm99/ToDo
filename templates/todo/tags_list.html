@@ -7,10 +7,6 @@
     <div class="text-center mb-4">
       <a href="{% url 'to_do:tag-create' %}" class="btn btn-dark">Create</a>
     </div>
-    <form method="get" action="" class="form-inline justify-content-center mb-4">
-      {{ search_form|crispy }}
-      <input class="btn btn-secondary ml-2" type="submit" value="Search">
-    </form>
     {% if tag_list %}
       <table class="table table-striped">
         <thead class="thead-dark">

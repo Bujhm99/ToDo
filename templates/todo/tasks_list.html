@@ -5,13 +5,8 @@
   <div class="container">
     <h1 class="display-4 text-center my-5">Tasks List</h1>
     <div class="text-center mb-4">
-{#      <a href="{% url 'to_do:task-create' %}" class="btn btn-dark">Create</a>#}
+      <a href="{% url 'to_do:task-create' %}" class="btn btn-dark">Create</a>
     </div>
-{#    <form title="<.> dot - for and search, <,> comma - for or search, <-> minus - for exclusion from search"#}
-{#          method="get" action="" class="form-inline justify-content-center mb-4">#}
-{#      {{ search_form|crispy }}#}
-{#      <input class="btn btn-secondary ml-2" type="submit" value="Search">#}
-{#    </form>#}
     {% if task_list %}
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -22,22 +17,32 @@
             <th>Deadline</th>
             <th>is_done</th>
             <th>tags</th>
+            <th>Update</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {% for task in task_list %}
             <tr>
+
               <td>{{ task.id }}</td>
-              <td>{{ task.name }}</td>
+              <td title="{{ task.content }}">{{ task.name }}</td>
               <td>{{ task.datetime }}</td>
               <td>{{ task.deadline }}</td>
-              <td>{{ task.is_done }}</td>
+              <td>
+                {% if task.is_done %}
+                  <a href="{% url 'to_do:task-is-done' pk=task.id %}" class="btn btn-dark">This is done</a>
+                {% else %}
+                  <a href="{% url 'to_do:task-is-done' pk=task.id %}" class="btn btn-danger">This is not done</a>
+                {% endif %}
+              </td>
               <td>
                 {% for tag in task.tags.all %}
                   {{ tag.name }},
                 {% endfor %}
               </td>
-{#              <td><a href="{% url "to do:task-detail" pk=task.id %}" class="btn btn-secondary">View</a></td>#}
+              <td><a href="{% url "to_do:task-update" pk=task.id %}" class="btn btn-secondary">Update</a></td>
+              <td><a href="{% url "to_do:task-delete" pk=task.id %}" class="btn btn-secondary">Delete</a></td>
             </tr>
           {% endfor %}
         </tbody>

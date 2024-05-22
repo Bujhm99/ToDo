@@ -19,3 +19,6 @@ class Task(models.Model):
 
     def __str__(self) -> models.CharField:
         return f"Task: {self.name} is done: {self.is_done}"
+
+    class Meta:
+        ordering = ("is_done", "-datetime",)
